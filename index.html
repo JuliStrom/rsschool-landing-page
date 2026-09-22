@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Готовые сайты с характером для бизнеса и личных проектов.">
+    <title>site.form — сайты для ваших идей</title>
+    <script>try {
+        document.documentElement.dataset.theme = localStorage.getItem('siteform-theme') || 'light'
+    } catch (e) {
+    }</script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+<header class="header">
+    <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="site.form — главная">site<span class="logo-dot">.</span>form<span
+                class="logo-star">✳</span>
+        </a>
+        <nav class="nav" aria-label="Основная навигация"><a href="catalog.html">Каталог сайтов ↗</a><a
+                href="index.html#how">Как это работает</a><a href="index.html#faq">Вопросы и ответы</a></nav>
+        <div class="header-actions">
+            <button class="theme-toggle" aria-label="Включить тёмную тему">☾</button>
+        </div>
+    </div>
+</header>
+<main>
+    <section class="hero container">
+        <div class="hero-copy"><p class="eyebrow"><span class="status-dot"></span> ХОРОШИМ ИДЕЯМ НУЖЕН СВОЙ САЙТ</p>
+            <h1>Ваша идея.<br>Наш дизайн.<br><span class="serif">Готово к запуску.</span></h1>
+            <p class="hero-description">Сайты с характером для бизнеса и личных проектов.<br>Выберите свой — и начните
+                что-то большое.</p><a class="button button-dark" href="catalog.html">Найти свой сайт <span>↗</span></a>
+            <div class="hero-note"><span class="tiny-stack"><i>А</i><i>М</i><i>К</i></span><span>Для тех, кто делает своё &nbsp; ↗</span>
+            </div>
+        </div>
+        <div class="hero-art" role="img" aria-label="Пример сайта Coffee House">
+            <div class="art-grid"></div>
+            <span class="art-label">DESIGNED TO MAKE A DIFFERENCE</span>
+            <div class="hero-browser">
+                <div class="browser-bar"><span>● ● ●</span><span>Coffee House</span><span>↗</span></div>
+                <img class="hero-site-preview" src="assets/CoffeHouse1.png" alt="Главная страница сайта Coffee House" fetchpriority="high">
+            </div>
+            <div class="floating-label"><span>✳</span> Хороший дизайн.<br>Без долгого ожидания.</div>
+            <span class="art-caption">ВАШ НОВЫЙ САЙТ УЖЕ ЗДЕСЬ ↗</span></div>
+    </section>
+    <div class="benefit-strip">
+        <div class="container">
+            <span>Никакого чистого листа</span><i>✳</i><span>Продумано до пикселя</span><i>✳</i><span>Красиво на любом экране</span><i>✳</i><span>Готово к вашим идеям</span>
+        </div>
+    </div>
+    <section class="section container" id="featured">
+        <div class="section-heading">
+            <div><p class="eyebrow">КОЛЛЕКЦИЯ SITE.FORM</p>
+                <h2>Найдите свой <em>характер.</em></h2></div>
+            <a class="text-link" href="catalog.html">Весь каталог ↗</a></div>
+        <div class="category-tabs" aria-label="Категории подборки">
+            <button class="active" data-category="all" aria-pressed="true">Все сайты <span>03</span></button>
+            <button data-category="business" aria-pressed="false">Для бизнеса</button>
+            <button data-category="shop" aria-pressed="false">Интернет-магазины</button>
+            <button data-category="portfolio" aria-pressed="false">Портфолио</button>
+            <button data-category="landing" aria-pressed="false">Лендинги</button>
+        </div>
+        <div class="product-grid" id="products" data-limit="3"></div>
+        <noscript>Для интерактивной подборки включите JavaScript.</noscript>
+        <div class="collection-note"><span>Меньше времени на разработку. Больше — на своё дело.</span><a
+                href="catalog.html">Смотреть все 6 сайтов ↗</a></div>
+    </section>
+    <section class="why-section">
+        <div class="container">
+            <div class="section-heading">
+                <div><p class="eyebrow">ПРОСТО НАЧАТЬ. ЛЕГКО ПРОДОЛЖИТЬ.</p>
+                    <h2>Всё важное — <em>уже внутри.</em></h2></div>
+                <p class="section-description">Мы позаботились о деталях,<br>чтобы вы сосредоточились на главном.</p>
+            </div>
+            <div class="features">
+                <article><span class="feature-icon">↗</span>
+                    <h3>Дизайн, который работает</h3>
+                    <p>Понятная структура, выразительная типографика и внимание к каждой детали.</p></article>
+                <article><span class="feature-icon">▣</span>
+                    <h3>На любом экране</h3>
+                    <p>Ваш сайт одинаково удобен на компьютере, планшете и в телефоне.</p></article>
+                <article><span class="feature-icon">✳</span>
+                    <h3>Место для вашего стиля</h3>
+                    <p>Меняйте тексты, цвета и изображения. Сделайте готовый дизайн по-настоящему своим.</p></article>
+            </div>
+        </div>
+    </section>
+    <section class="section container" id="how">
+        <div class="section-heading">
+            <div><p class="eyebrow">ОТ ИДЕИ ДО ПЕРВОГО КЛИЕНТА</p>
+                <h2>Три шага <em>к запуску.</em></h2></div>
+        </div>
+        <div class="steps">
+            <article><span>01 /</span>
+                <h3>Найдите свой сайт</h3>
+                <p>Выберите дизайн под задачу, настроение и характер вашего проекта.</p></article>
+            <article><span>02 /</span>
+                <h3>Добавьте своё</h3>
+                <p>Подготовьте тексты, фотографии и фирменные цвета для выбранного шаблона.</p></article>
+            <article><span>03 /</span>
+                <h3>Выходите в мир</h3>
+                <p>Разместите сайт на хостинге, подключите домен и поделитесь ссылкой.</p></article>
+        </div>
+    </section>
+    <section class="faq-section container" id="faq">
+        <div><p class="eyebrow">ДАВАЙТЕ РАЗБЕРЁМСЯ</p>
+            <h2>Есть <em>вопросы?</em></h2>
+            <p class="muted">Собрали то, что важно знать перед стартом.</p></div>
+        <div class="faq-list">
+            <details>
+                <summary>Что входит в готовый сайт?<span>+</span></summary>
+                <p>HTML, CSS и JavaScript выбранного шаблона: адаптивная вёрстка и готовые интерфейсные элементы. Домен,
+                    хостинг и серверная часть приобретаются и настраиваются отдельно.</p></details>
+            <details>
+                <summary>Можно ли изменить дизайн под себя?<span>+</span></summary>
+                <p>Да. Вы можете заменить тексты и изображения, настроить цвета и шрифты в исходном коде. Для
+                    редактирования понадобятся базовые знания HTML и CSS.</p></details>
+            <details>
+                <summary>Будет ли сайт работать на телефоне?<span>+</span></summary>
+                <p>Да, шаблоны адаптированы для мобильных устройств, планшетов и компьютеров, начиная с ширины экрана
+                    380 пикселей.</p></details>
+            <details>
+                <summary>Как приобрести сайт?<span>+</span></summary>
+                <p>Это учебный магазин: в каталоге можно посмотреть характеристики и добавить сайты в избранное.
+                    Настоящие заказы и платежи здесь не принимаются.</p></details>
+        </div>
+    </section>
+    <section class="container">
+        <div class="cta-banner">
+            <div><p class="eyebrow">ВАША СЛЕДУЮЩАЯ БОЛЬШАЯ ИДЕЯ</p>
+                <h2>Начинается <em>с сайта.</em></h2></div>
+            <a class="button button-dark" href="catalog.html">Выбрать свой дизайн <span>↗</span></a><span
+                class="cta-star" aria-hidden="true">✳</span></div>
+    </section>
+</main>
+<footer class="footer container">
+    <div class="footer-top">
+        <div><a class="logo" href="index.html">site<span class="logo-dot">.</span>form<span
+                class="logo-star">✳</span></a>
+            <p>Готовые сайты. Новые возможности.</p></div>
+        <nav aria-label="Навигация в подвале"><a href="catalog.html">Каталог</a><a href="index.html#how">Как это
+            работает</a><a href="index.html#faq">Вопросы и ответы</a></nav>
+        <a class="back-top" href="#">Наверх ↑</a></div>
+    <div class="footer-bottom">
+        <span>© 2026 site.form</span><span>Учебный проект · Сделано с вниманием к деталям</span><span>Дизайн для вашего старта ↗</span>
+    </div>
+</footer>
+<dialog id="product-dialog" aria-labelledby="dialog-title"></dialog>
+<div class="toast" role="status"></div>
+</body>
+</html>
