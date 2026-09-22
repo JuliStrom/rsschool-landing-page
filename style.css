@@ -9,6 +9,7 @@
   --line:#dedfd7;
   --soft:#eeefe8;
   --accent:#d8f36a;
+  --header-bg:#ded2bf;
   color-scheme: light;
 }
 
@@ -19,6 +20,7 @@
   --muted:#a5ad9e;
   --line:#3c4437;
   --soft:#242c21;
+  --header-bg:#393329;
   color-scheme: dark;
 }
 
@@ -107,7 +109,9 @@ a:hover {
 
 /* Navigation */
 .header {
+  background: var(--header-bg);
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 4px 16px rgba(25, 35, 20, 0.06);
 }
 
 .header-inner {
@@ -125,6 +129,24 @@ a:hover {
   display: inline-flex;
   align-items: center;
   line-height: 1;
+  flex-shrink: 0;
+}
+
+.logo-image {
+  display: block;
+  width: 210px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.header .logo-image {
+  mix-blend-mode: multiply;
+}
+
+:root[data-theme=dark] .header .logo-image {
+  filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: screen;
 }
 
 .logo-dot {
@@ -164,8 +186,12 @@ a:hover {
   place-content: center;
 }
 
+.theme-toggle {
+  border-color: var(--muted);
+}
+
 .theme-toggle:hover {
-  background: var(--soft);
+  border-color: var(--ink);
 }
 
 .header-cta {
@@ -1581,6 +1607,10 @@ dialog ul {
   }
   .logo {
     font-size: 27px;
+  }
+  .logo-image {
+    width: 180px;
+    height: 42px;
   }
   .logo-star {
     font-size: 29px;

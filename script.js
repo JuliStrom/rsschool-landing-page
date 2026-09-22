@@ -17,7 +17,12 @@ try {
   favorites = new Set(Array.isArray(saved) ? saved.filter(id => products.some(p => p.id === id)) : []);
 } catch { favorites = new Set(); }
 const state = { category: 'all', query: '', sort: 'default' };
-const money = value => new Intl.NumberFormat('ru-RU').format(value) + ' ₽';
+const money = value => new Intl.NumberFormat('ru-BY', {
+  style: 'currency',
+  currency: 'BYN',
+  currencyDisplay: 'code',
+  maximumFractionDigits: 0
+}).format(value);
 const themeButton = document.querySelector('.theme-toggle');
 
 function updateThemeButton() {
