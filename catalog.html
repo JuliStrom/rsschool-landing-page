@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Каталог готовых сайтов: бизнес, интернет-магазины, портфолио и лендинги.">
+    <title>Каталог сайтов — site.form</title>
+    <script>try {
+        document.documentElement.dataset.theme = localStorage.getItem('siteform-theme') || 'light'
+    } catch (e) {
+    }</script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+<header class="header">
+    <div class="container header-inner"><a class="logo" href="index.html" aria-label="site.form — главная"><img class="logo-image" src="assets/logo/logo.png" alt="site.form" width="2048" height="683"></a>
+        <nav class="nav" aria-label="Основная навигация"><a href="catalog.html" aria-current="page">Каталог сайтов ↗</a><a
+                href="index.html#how">Как это работает</a><a href="index.html#faq">Вопросы и ответы</a></nav>
+        <div class="header-actions">
+            <button class="theme-toggle" aria-label="Включить тёмную тему">☾</button>
+        </div>
+    </div>
+</header>
+<main class="container catalog-main">
+    <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Каталог</span></div>
+    <section aria-labelledby="catalog-title">
+        <div class="catalog-intro"><p class="eyebrow"><span class="status-dot"></span> КОЛЛЕКЦИЯ SITE.FORM</p>
+            <h1 id="catalog-title">Сайт под вашу <em>идею.</em></h1>
+            <p>Найдите свой стиль. Остальное мы уже продумали.</p><span class="catalog-star" aria-hidden="true">✳</span>
+        </div>
+        <div class="catalog-tools"><label class="search-field"><span aria-hidden="true">⌕</span><input id="search"
+                                                                                                       type="search"
+                                                                                                       placeholder="Поиск по названию или теме"
+                                                                                                       aria-label="Поиск сайтов"></label><label
+                class="sort-field">Сортировать: <select id="sort">
+            <option value="default">По умолчанию</option>
+            <option value="price-asc">Сначала дешевле</option>
+            <option value="price-desc">Сначала дороже</option>
+            <option value="name">По названию</option>
+        </select></label></div>
+        <div class="category-tabs" aria-label="Категории каталога">
+            <button class="active" data-category="all" aria-pressed="true">Все сайты <span>03</span></button>
+            <button data-category="business" aria-pressed="false">Для бизнеса</button>
+            <button data-category="shop" aria-pressed="false">Интернет-магазины</button>
+            <button data-category="portfolio" aria-pressed="false">Портфолио</button>
+            <button data-category="landing" aria-pressed="false">Лендинги</button>
+            <button data-category="favorites" aria-pressed="false">♡ Избранное</button>
+        </div>
+        <p id="result-count" class="result-count" role="status"></p>
+        <div class="product-grid" id="products"></div>
+        <noscript>Для просмотра интерактивного каталога включите JavaScript.</noscript>
+        <div class="empty-state" hidden><span>↗</span>
+            <h2>Пока ничего нет</h2>
+            <p>Попробуйте другую категорию или измените поисковый запрос.</p>
+            <button class="button button-dark" id="reset-filters">Сбросить фильтры</button>
+        </div>
+    </section>
+    <aside class="catalog-note"><span>✳</span>
+        <div><h2>Ваш стиль начинается с деталей.</h2>
+            <p>Каждый шаблон можно настроить: заменить цвета, тексты и изображения.</p></div>
+        <a href="index.html#faq" class="text-link">Узнать больше ↗</a></aside>
+</main>
+<footer class="footer container">
+    <div class="footer-top">
+        <div><a class="logo" href="index.html"><img class="logo-image" src="assets/logo/logo.png" alt="site.form" width="2048" height="683"></a>
+            <p>Готовые сайты. Новые возможности.</p></div>
+        <nav aria-label="Навигация в подвале"><a href="catalog.html">Каталог</a><a href="index.html#how">Как это
+            работает</a><a href="index.html#faq">Вопросы и ответы</a></nav>
+        <a class="back-top" href="#">Наверх ↑</a></div>
+    <div class="footer-bottom">
+        <span>© 2026 site.form</span><span>Учебный проект · Сделано с вниманием к деталям</span><span>Дизайн для вашего старта ↗</span>
+    </div>
+</footer>
+<dialog id="product-dialog" aria-labelledby="dialog-title"></dialog>
+<div class="toast" role="status"></div>
+</body>
+</html>
