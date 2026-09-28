@@ -3,7 +3,11 @@
 const products = [
   { id: 'brew', name: 'Coffee House', category: 'business', label: 'Кофейня', price: 10900, badge: '', image: 'assets/CoffeHouse1.png', description: 'Сайт кофейни с меню, фотографиями напитков и информацией о заведении.' },
   { id: 'botanica', name: 'Plants', category: 'shop', label: 'Растения и уход за садом', price: 16900, badge: 'Новинка', image: 'assets/Plants.png', description: 'Сайт о растениях и уходе за садом с описанием услуг и информацией о команде.' },
-  { id: 'mono', name: 'Portfolio', category: 'portfolio', label: 'Портфолио фотографа', price: 8900, badge: '', image: 'assets/Portfolio.png', description: 'Портфолио фотографа с примерами работ, навыками, стоимостью услуг и контактами.' }
+  { id: 'mono', name: 'Portfolio', category: 'portfolio', label: 'Портфолио фотографа', price: 8900, badge: '', image: 'assets/Portfolio.png', description: 'Портфолио фотографа с примерами работ, навыками, стоимостью услуг и контактами.' },
+  { id: 'library', name: 'Library', category: 'business', label: 'Библиотека', price: 12900, badge: '', image: 'assets/Library.png', description: 'Сайт библиотеки с каталогом книг и информацией для читателей.' },
+  { id: 'singolo', name: 'Singolo', category: 'landing', label: 'Лендинг', price: 11900, badge: '', image: 'assets/Singolo.png', description: 'Одностраничный сайт проекта Singolo.' },
+  { id: 'shelter', name: 'Shelter', category: 'business', label: 'Приют для животных', price: 13900, badge: '', image: 'assets/Shelter.png', description: 'Сайт приюта с информацией о животных и способах помощи.' },
+  { id: 'travel', name: 'Travel', category: 'landing', label: 'Путешествия', price: 14900, badge: '', image: 'assets/Travel.png', description: 'Сайт о путешествиях с подборкой направлений и поездок.' }
 ];
 
 // Storage may be unavailable in private mode or when opening a local file.
@@ -39,6 +43,41 @@ themeButton.addEventListener('click', () => {
   updateThemeButton();
 });
 
+const productGrid = document.querySelector('#products');
+const productDots = document.querySelector('#product-dots');
+function productsPerPage() {
+  if (matchMedia('(max-width: 600px)').matches) return 1;
+  if (matchMedia('(max-width: 800px)').matches) return 2;
+  return 3;
+}
+function updateActiveProductDot() {
+  if (!productGrid || !productDots) return;
+  const activePage = Math.round(productGrid.scrollLeft / (productGrid.clientWidth || 1));
+  productDots.querySelectorAll('button').forEach((dot, index) => {
+    if (index === activePage) dot.setAttribute('aria-current', 'page');
+    else dot.removeAttribute('aria-current');
+  });
+}
+function updateProductDots() {
+  if (!productGrid || !productDots) return;
+  const pageCount = Math.ceil(productGrid.children.length / productsPerPage());
+  productDots.hidden = pageCount <= 1;
+  productDots.innerHTML = Array.from({ length: pageCount }, (_, page) => {
+    const first = page * productsPerPage() + 1;
+    const last = Math.min(first + productsPerPage() - 1, productGrid.children.length);
+    return `<button type="button" data-page="${page}" aria-label="Показать сайты ${first}-${last}" ${page === 0 ? 'aria-current="page"' : ''}></button>`;
+  }).join('');
+}
+productGrid?.addEventListener('scroll', updateActiveProductDot);
+productDots?.addEventListener('click', event => {
+  const dot = event.target.closest('[data-page]');
+  if (dot) productGrid.scrollTo({ left: Number(dot.dataset.page) * productGrid.clientWidth, behavior: 'smooth' });
+});
+if (productGrid) {
+  new ResizeObserver(updateProductDots).observe(productGrid);
+  updateProductDots();
+}
+
 const menu = document.querySelector('.nav');
 const menuButton = document.querySelector('.menu-toggle');
 function closeMenu() {
@@ -68,7 +107,6 @@ function renderProducts() {
   if (state.sort === 'price-asc') list.sort((a, b) => a.price - b.price);
   if (state.sort === 'price-desc') list.sort((a, b) => b.price - a.price);
   if (state.sort === 'name') list.sort((a, b) => a.name.localeCompare(b.name));
-  if (grid.dataset.limit) list = list.slice(0, Number(grid.dataset.limit));
   // Only the fixed product dataset is inserted as HTML, never the search input.
   grid.innerHTML = list.map(p => `<article class="product-card">
     <button class="preview-button preview-${p.id}" data-product="${p.id}" aria-label="Подробнее о сайте ${p.name}">
@@ -78,6 +116,8 @@ function renderProducts() {
     <div class="product-meta"><div><h3 class="product-name">${p.name}</h3><p class="product-category">${p.label}</p></div><span class="price">${money(p.price)}</span></div>
     <div class="product-bottom"><div class="product-tags"><span>HTML / CSS</span><span>Адаптивный</span></div><button class="favorite" data-favorite="${p.id}" aria-pressed="${favorites.has(p.id)}" aria-label="${favorites.has(p.id) ? 'Убрать' : 'Добавить'} ${p.name} ${favorites.has(p.id) ? 'из избранного' : 'в избранное'}">${favorites.has(p.id) ? '♥' : '♡'}</button></div>
   </article>`).join('');
+  grid.scrollLeft = 0;
+  updateProductDots();
   const count = document.querySelector('#result-count');
   if (count) count.textContent = `Показано: ${list.length} из ${products.length}`;
   const empty = document.querySelector('.empty-state');

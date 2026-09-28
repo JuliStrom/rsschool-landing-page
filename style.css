@@ -563,12 +563,55 @@ a:hover {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 46px) / 3);
   gap: 30px 23px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.product-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .product-card {
   min-width: 0;
+  scroll-snap-align: start;
+}
+
+.product-dots {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 12px;
+}
+
+.product-dots[hidden] {
+  display: none;
+}
+
+.product-dots button {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.product-dots button::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.product-dots button[aria-current=page]::before {
+  background: var(--ink);
 }
 
 .preview-button {
@@ -1529,7 +1572,8 @@ dialog ul {
     display: none;
   }
   .product-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-columns: calc((100% - 18px) / 2);
+    gap: 25px 18px;
   }
   .section {
     padding-block: 48px;
@@ -1735,7 +1779,7 @@ dialog ul {
     padding: 8px 11px;
   }
   .product-grid {
-    grid-template-columns: 1fr;
+    grid-auto-columns: 100%;
     gap: 27px;
   }
   .preview-button, .catalog-main .preview-button {
