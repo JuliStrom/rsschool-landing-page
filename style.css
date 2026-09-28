@@ -1,26 +1,30 @@
 @charset "UTF-8";
-/* System fonts keep the pages independent of external services. */
-/* Shared palette: both pages use the same theme and components. */
+
 :root {
-  --bg:#f9f9f5;
+  --bg:#f5f9fc;
   --surface:#fff;
-  --ink:#252923;
-  --muted:#6e7367;
-  --line:#dedfd7;
-  --soft:#eeefe8;
-  --accent:#d8f36a;
-  --header-bg:#ded2bf;
+  --ink:#203030;
+  --muted:#63737b;
+  --line:#d7e1e8;
+  --soft:#edf4f8;
+  --accent:#dcefff;
+  --header-bg:#e6f2f9;
+  --brand:#0070e0;
+  --brand-strong:#005dbb;
   color-scheme: light;
 }
 
 :root[data-theme=dark] {
-  --bg:#191d18;
-  --surface:#232921;
-  --ink:#f1f2e9;
-  --muted:#a5ad9e;
-  --line:#3c4437;
-  --soft:#242c21;
-  --header-bg:#393329;
+  --bg:#141d22;
+  --surface:#1e2a31;
+  --ink:#edf5f7;
+  --muted:#a5b5bc;
+  --line:#394850;
+  --soft:#202d34;
+  --accent:#194267;
+  --header-bg:#152b39;
+  --brand:#42a5ff;
+  --brand-strong:#70baff;
   color-scheme: dark;
 }
 
@@ -57,7 +61,7 @@ button {
 }
 
 button:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible {
-  outline: 3px solid #85a72d;
+  outline: 3px solid var(--brand);
   outline-offset: 4px;
 }
 
@@ -99,7 +103,7 @@ a, button {
 }
 
 a:hover {
-  color: #76912c;
+  color: var(--brand);
 }
 
 .container {
@@ -134,9 +138,9 @@ a:hover {
 
 .logo-image {
   display: block;
-  width: 210px;
-  height: 48px;
-  object-fit: cover;
+  width: 180px;
+  height: auto;
+  object-fit: contain;
   border-radius: 4px;
 }
 
@@ -145,16 +149,16 @@ a:hover {
 }
 
 :root[data-theme=dark] .header .logo-image {
-  filter: invert(1) hue-rotate(180deg);
+  filter: brightness(1.7) saturate(1.1);
   mix-blend-mode: screen;
 }
 
 .logo-dot {
-  color: #91a84c;
+  color: var(--brand);
 }
 
 .logo-star {
-  color: #83994b;
+  color: var(--brand);
   font-size: 33px;
   margin-left: 10px;
 }
@@ -166,7 +170,7 @@ a:hover {
 }
 
 .nav a[aria-current] {
-  color: #80963d;
+  color: var(--brand);
 }
 
 .header-actions {
@@ -226,7 +230,7 @@ a:hover {
 .status-dot {
   height: 7px;
   width: 7px;
-  background: #8ba649;
+  background: var(--brand);
   border-radius: 50%;
   display: inline-block;
 }
@@ -260,7 +264,7 @@ a:hover {
 }
 
 .button-dark:hover {
-  background: #748c37;
+  background: var(--brand-strong);
   color: white;
   transform: translateY(-2px);
 }
@@ -361,102 +365,6 @@ a:hover {
   color: #c6c7bf;
 }
 
-.architecture-site {
-  padding: 16px 22px 14px;
-}
-
-.mock-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.mock-nav b {
-  font-size: 17px;
-  letter-spacing: -1px;
-}
-
-.mock-nav > span {
-  font-size: 6px;
-}
-
-.architecture-title {
-  font-size: 37px;
-  line-height: 1.02;
-  letter-spacing: -2px;
-  margin-top: 22px;
-  position: relative;
-  z-index: 2;
-}
-
-.arch-scene {
-  height: 139px;
-  margin-top: -15px;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(170deg, #d7d8ce 0%, #edebe1 65%, #c4b69c 65%);
-}
-
-.sun {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: #ece2c6;
-  position: absolute;
-  top: 9px;
-  left: 35px;
-}
-
-.building {
-  position: absolute;
-  right: 28px;
-  top: 15px;
-  width: 160px;
-  height: 130px;
-  background: linear-gradient(100deg, #d3c4aa, #eee5d3 65%, #b6a283 66%);
-  box-shadow: -17px 17px 0 #b8a88f;
-  transform: skewY(-5deg);
-}
-
-.building-window {
-  position: absolute;
-  left: 40px;
-  top: 20px;
-  width: 60px;
-  height: 120px;
-  border-radius: 50px 50px 0 0;
-  background: linear-gradient(100deg, #423d2d, #938269);
-  border: 9px solid #b9a489;
-  box-shadow: 12px 0 #e1d3b9;
-}
-
-.building-step {
-  position: absolute;
-  bottom: 0;
-  right: 38px;
-  width: 170px;
-  height: 13px;
-  background: #b6a487;
-  box-shadow: 0 -7px #d2c2a6;
-}
-
-.scene-plant {
-  position: absolute;
-  left: 13px;
-  bottom: -20px;
-  font-size: 95px;
-  color: #68705b;
-  transform: rotate(15deg);
-}
-
-.mock-bottom {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  font-size: 5px;
-  padding-top: 12px;
-}
-
 .floating-label {
   position: absolute;
   bottom: 42px;
@@ -501,7 +409,7 @@ a:hover {
 .benefit-strip i {
   font-size: 20px;
   font-style: normal;
-  color: #8a995e;
+  color: var(--brand);
 }
 
 /* Collection and template previews */
@@ -545,7 +453,7 @@ a:hover {
 }
 
 .category-tabs button:hover {
-  border-color: #8c9e63;
+  border-color: var(--brand);
   background: var(--soft);
 }
 
@@ -563,12 +471,55 @@ a:hover {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 46px) / 3);
   gap: 30px 23px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.product-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .product-card {
   min-width: 0;
+  scroll-snap-align: start;
+}
+
+.product-dots {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 12px;
+}
+
+.product-dots[hidden] {
+  display: none;
+}
+
+.product-dots button {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.product-dots button::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.product-dots button[aria-current=page]::before {
+  background: var(--ink);
 }
 
 .preview-button {
@@ -636,223 +587,16 @@ a:hover {
   color: #34392d;
 }
 
-.mini-site {
-  background: #f7f4eb;
-  height: 260px;
-  box-shadow: 0 7px 20px rgba(32, 32, 32, 0.0705882353);
-  padding: 16px;
-  transition: transform 0.25s;
-  color: #35392b;
-  overflow: hidden;
-}
-
-.mini-nav {
-  display: flex;
-  justify-content: space-between;
-  font-size: 8px;
-  align-items: center;
-}
-
-.mini-nav b {
-  font-size: 13px;
-  letter-spacing: -0.7px;
-}
-
-.mini-nav span {
-  font-size: 5px;
-}
-
-.mini-title {
-  font-size: 29px;
-  line-height: 1.05;
-  letter-spacing: -1.5px;
-  margin-top: 24px;
-  font-weight: 500;
-  position: relative;
-  z-index: 1;
-}
-
-.mini-subtitle {
-  font-size: 6px;
-  margin-top: 9px;
-}
-
-.mini-site .arch-scene {
-  height: 120px;
-  margin-top: 13px;
-}
-
-.mini-site .building {
-  right: 14px;
-  top: 11px;
-  width: 130px;
-}
-
 .preview-botanica {
   background: #e1e8da;
-}
-
-.preview-botanica .mini-site {
-  background: #f0f1e5;
-}
-
-.preview-botanica .mini-title {
-  font-family: Georgia, serif;
-  font-size: 34px;
-  color: #3d4c31;
-  text-align: center;
-}
-
-.preview-botanica .mini-subtitle {
-  text-align: center;
-}
-
-.plant-scene {
-  height: 140px;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  padding-top: 13px;
-}
-
-.plant {
-  width: 60px;
-  height: 70px;
-  background: linear-gradient(95deg, #c5a780, #e3c7a6);
-  border-radius: 3px 3px 19px 19px;
-  position: relative;
-  margin-top: 56px;
-}
-
-.plant:nth-child(2) {
-  width: 70px;
-  background: linear-gradient(95deg, #aab298, #c9ceba);
-  margin-top: 40px;
-}
-
-.plant:before {
-  content: "";
-  position: absolute;
-  width: 30px;
-  height: 80px;
-  bottom: 60px;
-  left: 10px;
-  background: #5b7044;
-  border-radius: 90% 0 80% 10%;
-  transform: rotate(-20deg);
-  box-shadow: 20px 5px #81915a;
-}
-
-.plant:nth-child(2):before {
-  transform: rotate(8deg);
-  height: 100px;
-  background: #425735;
 }
 
 .preview-mono {
   background: #e5def0;
 }
 
-.preview-mono .mini-site {
-  background: #bba2e0;
-  color: #25202c;
-}
-
-.preview-mono .mini-title {
-  font-size: 34px;
-  font-weight: 750;
-  margin-top: 34px;
-  letter-spacing: -2px;
-}
-
-.mono-shape {
-  font-size: 130px;
-  line-height: 0.9;
-  text-align: right;
-  margin-top: -8px;
-  color: #41334e;
-  transform: rotate(-17deg);
-}
-
 .preview-brew {
   background: #eadfd3;
-}
-
-.preview-brew .mini-site {
-  background: #492b22;
-  color: #f3e3c6;
-}
-
-.preview-brew .mini-title {
-  font-family: Georgia, serif;
-  font-size: 33px;
-}
-
-.coffee-shape {
-  width: 106px;
-  height: 90px;
-  border-radius: 5px 5px 45px 45px;
-  background: #dfb78b;
-  position: relative;
-  margin: 20px auto;
-  transform: rotate(-9deg);
-  box-shadow: 0 12px 0 -4px #2d1914;
-}
-
-.coffee-shape:after {
-  content: "";
-  position: absolute;
-  right: -26px;
-  top: 9px;
-  width: 30px;
-  height: 45px;
-  border: 9px solid #dfb78b;
-  border-radius: 50%;
-}
-
-.preview-flow {
-  background: #dde6ec;
-}
-
-.preview-flow .mini-site {
-  background: #eef4f8;
-  color: #233444;
-}
-
-.preview-flow .mini-title {
-  font-size: 31px;
-}
-
-.flow-shape {
-  height: 100px;
-  margin-top: 19px;
-  background: linear-gradient(135deg, #a1c7e3, #5684a5);
-  border-radius: 60px 60px 0 0;
-  transform: rotate(-10deg);
-  box-shadow: 40px 20px 0 #b2d2e9;
-}
-
-.preview-atelier {
-  background: #e9dedc;
-}
-
-.preview-atelier .mini-site {
-  background: #f4e8e3;
-  color: #593c35;
-}
-
-.preview-atelier .mini-title {
-  font-family: Georgia, serif;
-  font-size: 34px;
-}
-
-.atelier-shape {
-  width: 100px;
-  height: 110px;
-  margin: 18px auto;
-  background: linear-gradient(100deg, #c79a7b, #e1bfa3, #ac755e);
-  border-radius: 38% 38% 25% 25%;
-  transform: rotate(9deg);
 }
 
 .product-meta {
@@ -914,7 +658,7 @@ a:hover {
 }
 
 .favorite[aria-pressed=true] {
-  color: #8ca640;
+  color: var(--brand);
 }
 
 .collection-note {
@@ -927,10 +671,6 @@ a:hover {
 
 .collection-note a {
   color: var(--ink);
-}
-
-.mini-site, .mini-title, .mini-subtitle, .mini-site .arch-scene, .mini-site .mono-shape, .mini-site .coffee-shape, .mini-site .flow-shape, .mini-site .atelier-shape {
-  display: block;
 }
 
 /* Content sections */
@@ -993,7 +733,7 @@ a:hover {
 }
 
 .steps article > span {
-  color: #819445;
+  color: var(--brand);
   font-size: 12px;
   display: block;
   margin-bottom: 28px;
@@ -1056,7 +796,7 @@ details p {
 
 .cta-banner {
   background: var(--accent);
-  color: #282e22;
+  color: var(--ink);
   border-radius: 9px;
   padding: 39px 45px;
   display: flex;
@@ -1072,8 +812,8 @@ details p {
 }
 
 .cta-banner .button {
-  background: #282e22;
-  color: #fff;
+  background: var(--ink);
+  color: var(--bg);
   z-index: 1;
 }
 
@@ -1081,7 +821,7 @@ details p {
   position: absolute;
   right: 255px;
   bottom: -55px;
-  color: #bed751;
+  color: var(--brand);
   font-size: 190px;
   line-height: 1;
   pointer-events: none;
@@ -1092,41 +832,53 @@ details p {
 }
 
 .footer {
-  padding-top: 53px;
+  width: 100%;
+  margin-top: 15px;
+  padding-block: 14px;
+  background: var(--soft);
+  border-top: 1px solid var(--line);
 }
 
-.footer-top {
+.footer-inner {
   display: flex;
   justify-content: space-between;
-  gap: 25px;
+  gap: 20px;
   align-items: center;
-  padding-bottom: 34px;
 }
 
-.footer-top p {
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.footer-logo-image {
+  display: block;
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+}
+
+.footer-brand p {
   font-size: 10px;
   color: var(--muted);
-  margin: 12px 0 0;
+  margin: 0;
 }
 
-.footer nav {
+.footer-meta {
   display: flex;
-  gap: 30px;
-  font-size: 11px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  font-size: 9px;
+  color: var(--muted);
 }
 
 .back-top {
   font-size: 11px;
-}
-
-.footer-bottom {
-  padding: 19px 0 24px;
-  border-top: 1px solid var(--line);
-  font-size: 9px;
-  color: var(--muted);
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  flex-shrink: 0;
 }
 
 /* Catalog and dialog */
@@ -1161,7 +913,7 @@ details p {
   top: -17px;
   font-size: 136px;
   line-height: 1.2;
-  color: #9aaa73;
+  color: var(--brand);
 }
 
 .catalog-tools {
@@ -1225,14 +977,6 @@ select {
   height: 285px;
 }
 
-.catalog-main .mini-site {
-  height: 300px;
-}
-
-.catalog-main .mini-title {
-  margin-top: 33px;
-}
-
 .catalog-note {
   margin-top: 65px;
   background: var(--soft);
@@ -1246,7 +990,7 @@ select {
 
 .catalog-note > span {
   font-size: 44px;
-  color: #8b9d60;
+  color: var(--brand);
 }
 
 .catalog-note h2 {
@@ -1271,7 +1015,7 @@ select {
 
 .empty-state > span {
   font-size: 40px;
-  color: #8b9d60;
+  color: var(--brand);
 }
 
 .empty-state h2 {
@@ -1289,12 +1033,12 @@ select {
 
 dialog {
   width: min(570px, 100% - 32px);
-  max-height: 90vh;
-  overflow: auto;
+  max-height: calc(100vh - 32px);
+  overflow: hidden;
   background: var(--bg);
   color: var(--ink);
   border: 1px solid var(--line);
-  padding: 32px;
+  padding: 22px;
   border-radius: 12px;
 }
 
@@ -1306,43 +1050,144 @@ dialog::backdrop {
 .dialog-close {
   position: absolute;
   right: 15px;
-  top: 11px;
+  top: 3px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
   border: 0;
   background: none;
   font-size: 28px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+
+.dialog-image {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  max-height: 150px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 4px;
+}
+
+.dialog-image[data-preview-theme=dark] {
+  filter: brightness(0.68) saturate(0.85);
+}
+
+.dialog-image[data-preview-theme=brand] {
+  filter: sepia(0.2) saturate(1.35) hue-rotate(345deg);
 }
 
 .dialog-category {
   font-size: 11px;
   color: var(--muted);
-  margin-top: 12px;
+  margin: 7px 0 0;
+}
+
+.dialog-pages {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 8px;
+  margin-block: 8px;
+  border-block: 1px solid var(--line);
+}
+
+.dialog-pages label {
+  font-size: 13px;
+  font-weight: 550;
+}
+
+.dialog-pages input {
+  width: 76px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.dialog-select-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 550;
+}
+
+.dialog-select-field select {
+  width: 62%;
+  min-height: 34px;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.dialog-language-summary {
+  margin: 5px 0 0;
+  font-size: 10px;
+}
+
+.dialog-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 9px;
+  font-size: 12px;
+}
+
+.dialog-checkbox input {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: var(--brand);
 }
 
 dialog h2 {
   padding-right: 20px;
-  margin: 15px 0;
+  margin: 5px 0 7px;
+  font-size: 28px;
 }
 
 dialog p, dialog li {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--muted);
 }
 
 dialog ul {
-  padding-left: 20px;
+  margin: 8px 0;
+  padding-left: 18px;
+  line-height: 1.35;
 }
 
 .dialog-price {
-  font-size: 27px;
+  font-size: 23px;
   font-weight: 550;
-  margin-block: 20px;
+  margin-block: 9px;
+}
+
+dialog .button {
+  padding: 10px 16px;
 }
 
 .demo-note {
   border-top: 1px solid var(--line);
-  padding-top: 15px;
-  margin-top: 22px;
+  padding-top: 8px;
+  margin-top: 12px;
   margin-bottom: 0;
+  font-size: 10px;
+}
+
+.dialog-features {
+  margin: 8px 0;
   font-size: 11px;
 }
 
@@ -1380,12 +1225,6 @@ dialog ul {
   .hero-browser {
     width: 82%;
   }
-  .architecture-title {
-    font-size: 44px;
-  }
-  .arch-scene {
-    height: 160px;
-  }
   .preview-button {
     height: 275px;
   }
@@ -1413,21 +1252,9 @@ dialog ul {
   .hero-art {
     height: 390px;
   }
-  .architecture-title {
-    font-size: 32px;
-  }
-  .architecture-site {
-    padding: 14px;
-  }
   .preview-button {
     padding: 22px 16px 0;
     height: 232px;
-  }
-  .mini-title {
-    font-size: 25px;
-  }
-  .preview-botanica .mini-title, .preview-mono .mini-title {
-    font-size: 29px;
   }
   .product-grid {
     gap: 25px 18px;
@@ -1441,9 +1268,6 @@ dialog ul {
   .benefit-strip .container {
     font-size: 10px;
     gap: 10px;
-  }
-  .footer nav {
-    gap: 19px;
   }
   .catalog-star {
     font-size: 110px;
@@ -1485,20 +1309,6 @@ dialog ul {
   .hero-art {
     height: 330px;
   }
-  .architecture-title {
-    font-size: 28px;
-  }
-  .arch-scene {
-    height: 113px;
-  }
-  .building {
-    width: 115px;
-    right: 12px;
-  }
-  .building-window {
-    left: 24px;
-    width: 53px;
-  }
   .floating-label {
     right: -6px;
     bottom: 26px;
@@ -1529,7 +1339,8 @@ dialog ul {
     display: none;
   }
   .product-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-columns: calc((100% - 18px) / 2);
+    gap: 25px 18px;
   }
   .section {
     padding-block: 48px;
@@ -1561,12 +1372,6 @@ dialog ul {
   }
   .cta-banner .button {
     gap: 18px;
-  }
-  .footer-top {
-    flex-wrap: wrap;
-  }
-  .footer-bottom span:last-child {
-    display: none;
   }
   .catalog-intro h1 {
     font-size: 48px;
@@ -1609,8 +1414,8 @@ dialog ul {
     font-size: 27px;
   }
   .logo-image {
-    width: 180px;
-    height: 42px;
+    width: 60px;
+    height: 45px;
   }
   .logo-star {
     font-size: 29px;
@@ -1677,12 +1482,6 @@ dialog ul {
   .hero-browser {
     width: 81%;
   }
-  .architecture-title {
-    font-size: 35px;
-  }
-  .arch-scene {
-    height: 126px;
-  }
   .floating-label {
     right: -3px;
     bottom: 27px;
@@ -1735,35 +1534,12 @@ dialog ul {
     padding: 8px 11px;
   }
   .product-grid {
-    grid-template-columns: 1fr;
+    grid-auto-columns: 100%;
     gap: 27px;
   }
   .preview-button, .catalog-main .preview-button {
     height: 290px;
     padding: 25px 29px 0;
-  }
-  .mini-site {
-    padding: 21px;
-    height: 300px;
-  }
-  .mini-title, .preview-botanica .mini-title, .preview-mono .mini-title {
-    font-size: 35px;
-    margin-top: 27px;
-  }
-  .mini-site .arch-scene {
-    height: 160px;
-  }
-  .mini-nav b {
-    font-size: 16px;
-  }
-  .mini-nav span {
-    font-size: 6px;
-  }
-  .mini-subtitle {
-    font-size: 7px;
-  }
-  .plant-scene {
-    padding-top: 24px;
   }
   .product-meta {
     margin-top: 13px;
@@ -1870,27 +1646,31 @@ dialog ul {
     font-size: 170px;
   }
   .footer {
-    padding-top: 35px;
+    padding-block: 14px;
   }
-  .footer-top {
+  .footer-inner {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 25px;
-    padding-bottom: 25px;
+    gap: 12px;
   }
-  .footer nav {
+  .footer-brand {
+    gap: 7px;
+  }
+  .footer-logo-image {
+    width: 44px;
+    height: 26px;
+  }
+  .footer-brand p {
+    max-width: 120px;
+    font-size: 9px;
+  }
+  .footer-meta {
     grid-column: 1/-1;
-    grid-row: 2;
-    gap: 22px;
-    font-size: 10px;
-  }
-  .footer-bottom {
+    justify-content: space-between;
+    gap: 6px 10px;
+    padding-top: 9px;
+    border-top: 1px solid var(--line);
     font-size: 8px;
-    gap: 14px;
-  }
-  .footer-bottom span:nth-child(2) {
-    max-width: 175px;
-    text-align: right;
   }
   .breadcrumbs {
     margin: 23px 0 27px;
@@ -1956,7 +1736,17 @@ dialog ul {
     font-size: 24px;
   }
   dialog {
-    padding: 24px;
+    max-height: calc(100vh - 16px);
+    padding: 14px;
+  }
+  .dialog-image {
+    max-height: 90px;
+  }
+  .dialog-features {
+    display: none;
+  }
+  dialog h2 {
+    font-size: 24px;
   }
   .preview-button:after {
     opacity: 1;

@@ -1,9 +1,13 @@
 'use strict';
 
 const products = [
-  { id: 'brew', name: 'Coffee House', category: 'business', label: 'Кофейня', price: 10900, badge: '', image: 'assets/CoffeHouse1.png', description: 'Сайт кофейни с меню, фотографиями напитков и информацией о заведении.' },
-  { id: 'botanica', name: 'Plants', category: 'shop', label: 'Растения и уход за садом', price: 16900, badge: 'Новинка', image: 'assets/Plants.png', description: 'Сайт о растениях и уходе за садом с описанием услуг и информацией о команде.' },
-  { id: 'mono', name: 'Portfolio', category: 'portfolio', label: 'Портфолио фотографа', price: 8900, badge: '', image: 'assets/Portfolio.png', description: 'Портфолио фотографа с примерами работ, навыками, стоимостью услуг и контактами.' }
+  { id: 'brew', name: 'Coffee House', category: 'business', label: 'Кофейня', price: 220, badge: '', image: 'assets/CoffeHouse1.png', description: 'Сайт кофейни с меню, фотографиями напитков и информацией о заведении.' },
+  { id: 'botanica', name: 'Plants', category: 'shop', label: 'Растения и уход за садом', price: 300, badge: 'Новинка', image: 'assets/Plants.png', description: 'Сайт о растениях и уходе за садом с описанием услуг и информацией о команде.' },
+  { id: 'mono', name: 'Portfolio', category: 'portfolio', label: 'Портфолио фотографа', price: 180, badge: '', image: 'assets/Portfolio.png', description: 'Портфолио фотографа с примерами работ, навыками, стоимостью услуг и контактами.' },
+  { id: 'library', name: 'Library', category: 'business', label: 'Библиотека', price: 250, badge: '', image: 'assets/Library.png', description: 'Сайт библиотеки с каталогом книг и информацией для читателей.' },
+  { id: 'singolo', name: 'Singolo', category: 'landing', label: 'Лендинг', price: 250, badge: '', image: 'assets/Singolo.png', description: 'Одностраничный сайт проекта Singolo.' },
+  { id: 'shelter', name: 'Shelter', category: 'business', label: 'Приют для животных', price: 280, badge: '', image: 'assets/Shelter.png', description: 'Сайт приюта с информацией о животных и способах помощи.' },
+  { id: 'travel', name: 'Travel', category: 'landing', label: 'Путешествия', price: 270, badge: '', image: 'assets/Travel.png', description: 'Сайт о путешествиях с подборкой направлений и поездок.' }
 ];
 
 // Storage may be unavailable in private mode or when opening a local file.
@@ -39,6 +43,44 @@ themeButton.addEventListener('click', () => {
   updateThemeButton();
 });
 
+const productGrid = document.querySelector('#products');
+const productDots = document.querySelector('#product-dots');
+function productsPerPage() {
+  if (matchMedia('(max-width: 600px)').matches) return 1;
+  if (matchMedia('(max-width: 800px)').matches) return 2;
+  return 3;
+}
+function updateActiveProductDot() {
+  if (!productGrid || !productDots) return;
+  const activePage = Math.round(productGrid.scrollLeft / (productGrid.clientWidth || 1));
+  productDots.querySelectorAll('button').forEach((dot, index) => {
+    if (index === activePage) dot.setAttribute('aria-current', 'page');
+    else dot.removeAttribute('aria-current');
+  });
+}
+function updateProductDots() {
+  if (!productGrid || !productDots) return;
+  const pageCount = Math.ceil(productGrid.children.length / productsPerPage());
+  productDots.hidden = pageCount <= 1;
+  productDots.innerHTML = Array.from({ length: pageCount }, (_, page) => {
+    const first = page * productsPerPage() + 1;
+    const last = Math.min(first + productsPerPage() - 1, productGrid.children.length);
+    return `<button type="button" data-page="${page}" aria-label="Показать сайты ${first}-${last}" ${page === 0 ? 'aria-current="page"' : ''}></button>`;
+  }).join('');
+}
+productGrid?.addEventListener('scroll', updateActiveProductDot);
+productDots?.addEventListener('click', event => {
+  const dot = event.target.closest('[data-page]');
+  if (dot) {
+    productGrid.scrollLeft = Number(dot.dataset.page) * productGrid.clientWidth;
+    updateActiveProductDot();
+  }
+});
+if (productGrid) {
+  new ResizeObserver(updateProductDots).observe(productGrid);
+  updateProductDots();
+}
+
 const menu = document.querySelector('.nav');
 const menuButton = document.querySelector('.menu-toggle');
 function closeMenu() {
@@ -68,7 +110,6 @@ function renderProducts() {
   if (state.sort === 'price-asc') list.sort((a, b) => a.price - b.price);
   if (state.sort === 'price-desc') list.sort((a, b) => b.price - a.price);
   if (state.sort === 'name') list.sort((a, b) => a.name.localeCompare(b.name));
-  if (grid.dataset.limit) list = list.slice(0, Number(grid.dataset.limit));
   // Only the fixed product dataset is inserted as HTML, never the search input.
   grid.innerHTML = list.map(p => `<article class="product-card">
     <button class="preview-button preview-${p.id}" data-product="${p.id}" aria-label="Подробнее о сайте ${p.name}">
@@ -78,6 +119,8 @@ function renderProducts() {
     <div class="product-meta"><div><h3 class="product-name">${p.name}</h3><p class="product-category">${p.label}</p></div><span class="price">${money(p.price)}</span></div>
     <div class="product-bottom"><div class="product-tags"><span>HTML / CSS</span><span>Адаптивный</span></div><button class="favorite" data-favorite="${p.id}" aria-pressed="${favorites.has(p.id)}" aria-label="${favorites.has(p.id) ? 'Убрать' : 'Добавить'} ${p.name} ${favorites.has(p.id) ? 'из избранного' : 'в избранное'}">${favorites.has(p.id) ? '♥' : '♡'}</button></div>
   </article>`).join('');
+  grid.scrollLeft = 0;
+  updateProductDots();
   const count = document.querySelector('#result-count');
   if (count) count.textContent = `Показано: ${list.length} из ${products.length}`;
   const empty = document.querySelector('.empty-state');
@@ -133,7 +176,31 @@ document.querySelector('#products').addEventListener('click', event => {
   if (!card) return;
   const p = products.find(item => item.id === card.dataset.product);
   openedProductId = p.id;
-  dialog.innerHTML = `<button class="dialog-close" aria-label="Закрыть окно" autofocus>×</button><p class="dialog-category">${p.label}</p><h2 id="dialog-title">${p.name}<em> — ваш новый сайт.</em></h2><p>${p.description}</p><ul><li>Исходный код на HTML, CSS и JavaScript</li><li>Адаптивная вёрстка для компьютера, планшета и телефона</li><li>Возможность менять контент и оформление</li></ul><div class="dialog-price">${money(p.price)}</div><button class="button button-dark dialog-favorite" data-id="${p.id}" aria-pressed="${favorites.has(p.id)}">${favorites.has(p.id) ? 'Убрать из избранного ♥' : 'Добавить в избранное ♡'}</button><p class="demo-note">Учебный каталог. Цена приведена для примера. Покупка и скачивание шаблонов недоступны.</p>`;
+  dialog.innerHTML = `<button class="dialog-close" aria-label="Закрыть окно" autofocus>×</button><img class="dialog-image" data-preview-theme="light" src="${p.image}" alt="Пример сайта ${p.name}"><p class="dialog-category">${p.label}</p><h2 id="dialog-title">${p.name}</h2><p>${p.description}</p><div class="dialog-pages"><label for="page-count">Количество страниц</label><input id="page-count" type="number" min="1" max="20" step="1" value="1"></div><label class="dialog-select-field">Цветовая тема<select id="site-theme"><option value="light">Светлая</option><option value="dark">Тёмная</option><option value="brand">Фирменная</option></select></label><label class="dialog-select-field">Языки сайта<select id="site-language"><option value="ru">Русский</option><option value="ru-en">Русский + English</option></select></label><p class="dialog-language-summary" id="dialog-language-summary" aria-live="polite">Состав сайта: русская версия</p><label class="dialog-checkbox"><input id="turnkey-site" type="checkbox">Сайт под ключ</label><p class="dialog-features">Адаптивная вёрстка и исходный код входят в шаблон.</p><div class="dialog-price" id="dialog-price" aria-live="polite">${money(p.price)}</div><button class="button button-dark dialog-favorite" data-id="${p.id}" aria-pressed="${favorites.has(p.id)}">${favorites.has(p.id) ? 'Убрать из избранного ♥' : 'Добавить в избранное ♡'}</button><p class="demo-note">Учебный каталог. Цена приведена для примера. Покупка и скачивание шаблонов недоступны.</p>`;
+  const pageInput = dialog.querySelector('#page-count');
+  const languageSelect = dialog.querySelector('#site-language');
+  const themeSelect = dialog.querySelector('#site-theme');
+  const turnkeyInput = dialog.querySelector('#turnkey-site');
+  const updateOptions = () => {
+    const pages = Number(pageInput.value);
+    if (!Number.isInteger(pages) || pages < 1 || pages > 20) return;
+    const languageExtra = languageSelect.value === 'ru-en' ? 0.15 : 0;
+    const subtotal = p.price * (1 + (pages - 1) * 0.15 + languageExtra);
+    dialog.querySelector('#dialog-price').textContent = money(subtotal * (turnkeyInput.checked ? 1.2 : 1));
+    dialog.querySelector('#dialog-language-summary').textContent = languageSelect.value === 'ru-en'
+      ? 'Состав сайта: русская и английская версии'
+      : 'Состав сайта: русская версия';
+  };
+  pageInput.addEventListener('input', updateOptions);
+  pageInput.addEventListener('change', () => {
+    pageInput.value = Math.min(20, Math.max(1, Math.trunc(Number(pageInput.value) || 1)));
+    updateOptions();
+  });
+  languageSelect.addEventListener('change', updateOptions);
+  turnkeyInput.addEventListener('change', updateOptions);
+  themeSelect.addEventListener('change', () => {
+    dialog.querySelector('.dialog-image').dataset.previewTheme = themeSelect.value;
+  });
   dialog.showModal();
   document.body.style.overflow = 'hidden';
 });
